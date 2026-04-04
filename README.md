@@ -102,7 +102,7 @@ npm start
 > **¿Por qué `npm ci --ignore-scripts`?**
 > `npm ci` instala exactamente lo que está en el lockfile — sin drift de versiones.
 > `--ignore-scripts` bloquea scripts `postinstall`, previniendo ataques de supply chain
-> como el [incidente de axios (Mar 2026)](https://www.stepsecurity.io/blog/axios-compromised-on-npm-malicious-versions-drop-remote-access-trojan).
+
 
 ---
 
