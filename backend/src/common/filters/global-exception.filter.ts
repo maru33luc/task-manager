@@ -48,19 +48,14 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       }
     } else if (exception instanceof Error) {
       // Log the real error for debugging, but do NOT send it to the client
-      this.logger.error(
-        `Unhandled exception on ${request.method} ${request.url}`,
-        exception.stack,
-      );
+      this.logger.error(`Unhandled exception on ${request.method} ${request.url}`, exception.stack);
       // Return generic 500 — never expose DB errors, file paths, etc.
       status = HttpStatus.INTERNAL_SERVER_ERROR;
       message = 'An unexpected error occurred';
     }
 
     if (exception instanceof HttpException) {
-      this.logger.warn(
-        `${request.method} ${request.url} → ${status}: ${JSON.stringify(message)}`,
-      );
+      this.logger.warn(`${request.method} ${request.url} → ${status}: ${JSON.stringify(message)}`);
     }
 
     const errorBody: ErrorResponse = {

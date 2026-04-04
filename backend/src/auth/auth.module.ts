@@ -8,12 +8,7 @@ import { AuthController } from './auth.controller';
 import { JwtStrategy, JwtRefreshStrategy } from './strategies';
 
 @Module({
-  imports: [
-    ConfigModule,
-    PassportModule,
-    JwtModule.register({}),
-    UsersModule,
-  ],
+  imports: [ConfigModule, PassportModule, JwtModule.register({}), UsersModule],
   providers: [AuthService, JwtStrategy, JwtRefreshStrategy],
   controllers: [AuthController],
   exports: [AuthService],

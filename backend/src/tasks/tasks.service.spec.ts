@@ -30,10 +30,7 @@ describe('TasksService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        TasksService,
-        { provide: getRepositoryToken(Task), useValue: mockRepository },
-      ],
+      providers: [TasksService, { provide: getRepositoryToken(Task), useValue: mockRepository }],
     }).compile();
 
     service = module.get<TasksService>(TasksService);

@@ -22,13 +22,13 @@ import { StatsModule } from './stats';
       useFactory: () => [
         {
           name: 'default',
-          ttl: 60_000,   // 60 seconds window
-          limit: 100,    // max 100 requests per window
+          ttl: 60_000, // 60 seconds window
+          limit: 100, // max 100 requests per window
         },
         {
           name: 'auth',
-          ttl: 60_000,   // 60 seconds window
-          limit: 10,     // max 10 auth attempts per window (applied per-endpoint)
+          ttl: 60_000, // 60 seconds window
+          limit: 10, // max 10 auth attempts per window (applied per-endpoint)
         },
       ],
     }),

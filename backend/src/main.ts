@@ -9,9 +9,10 @@ import { GlobalExceptionFilter, LoggingInterceptor } from './common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     // Never expose error stack traces
-    logger: process.env['NODE_ENV'] === 'production'
-      ? ['error', 'warn']
-      : ['error', 'warn', 'log', 'verbose'],
+    logger:
+      process.env['NODE_ENV'] === 'production'
+        ? ['error', 'warn']
+        : ['error', 'warn', 'log', 'verbose'],
   });
 
   const configService = app.get(ConfigService);
@@ -36,9 +37,7 @@ async function bootstrap() {
         },
       },
       crossOriginEmbedderPolicy: false, // required for Swagger UI
-      hsts: isProduction
-        ? { maxAge: 31536000, includeSubDomains: true, preload: true }
-        : false,
+      hsts: isProduction ? { maxAge: 31536000, includeSubDomains: true, preload: true } : false,
       referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
     }),
   );

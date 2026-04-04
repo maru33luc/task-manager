@@ -13,12 +13,7 @@ import {
   HttpStatus,
   ParseUUIDPipe,
 } from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiResponse,
-  ApiBearerAuth,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto, UpdateTaskDto, TaskFilterDto } from './dto';
 import { JwtAuthGuard } from '../auth';
@@ -49,10 +44,7 @@ export class TasksController {
   @ApiOperation({ summary: 'Get task by ID' })
   @ApiResponse({ status: 200, description: 'Task found' })
   @ApiResponse({ status: 404, description: 'Task not found' })
-  async findOne(
-    @Request() req: RequestWithUser,
-    @Param('id', ParseUUIDPipe) id: string,
-  ) {
+  async findOne(@Request() req: RequestWithUser, @Param('id', ParseUUIDPipe) id: string) {
     const task = await this.tasksService.findOne(id, req.user.id);
     return this.tasksService.toResponseDto(task);
   }
@@ -83,10 +75,7 @@ export class TasksController {
   @ApiOperation({ summary: 'Delete a task' })
   @ApiResponse({ status: 204, description: 'Task deleted' })
   @ApiResponse({ status: 404, description: 'Task not found' })
-  async remove(
-    @Request() req: RequestWithUser,
-    @Param('id', ParseUUIDPipe) id: string,
-  ) {
+  async remove(@Request() req: RequestWithUser, @Param('id', ParseUUIDPipe) id: string) {
     await this.tasksService.remove(id, req.user.id);
   }
 }
