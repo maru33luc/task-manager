@@ -8,9 +8,9 @@ import {
   Request,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
-import { Throttle, SkipThrottle } from '@nestjs/throttler';
+import { Throttle } from '@nestjs/throttler';
 import { AuthService } from './auth.service';
-import { RegisterDto, LoginDto, RefreshTokenDto } from './dto';
+import { RegisterDto, LoginDto } from './dto';
 import { JwtRefreshGuard } from './guards';
 
 interface RequestWithUser extends Request {
@@ -54,7 +54,7 @@ export class AuthController {
   @UseGuards(JwtRefreshGuard)
   @ApiOperation({ summary: 'Refresh access token' })
   @ApiResponse({ status: 200, description: 'Token refreshed' })
-  async refresh(@Request() req: RequestWithUser, @Body() _dto: RefreshTokenDto) {
+  async refresh(@Request() req: RequestWithUser) {
     return this.authService.refresh(req.user.id, req.user.email);
   }
 
