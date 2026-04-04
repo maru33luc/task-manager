@@ -22,7 +22,18 @@
       "Bash(node ../prebuild-install/bin.js)",
       "Bash(npm start:*)",
       "Bash(curl -s http://localhost:3000/api/docs)",
-      "Bash(curl -s http://localhost:4200)"
+      "Bash(curl -s http://localhost:4200)",
+      "Bash(echo \"Backend PID: $!\")",
+      "Bash(echo \"Frontend PID: $!\")",
+      "Bash(pkill -f \"nest start\")",
+      "Bash(echo \"New backend PID: $!\")",
+      "Bash(echo \"PID: $!\")",
+      "Bash(ls:*)",
+      "Skill(update-config)",
+      "Bash(powershell.exe -NoProfile -Command ':*)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(powershell.exe:*)",
+      "Bash(grep -n \"font-display font-bold.*leading-tight\" /c/Users/maru3/Desktop/PROJECTOS/task-manager/frontend/src/app/**/*.html)"
     ]
   }
 }

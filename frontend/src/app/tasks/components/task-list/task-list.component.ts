@@ -121,18 +121,27 @@ export class TaskListComponent implements OnInit {
 
   statusBadgeClass(status: TaskStatus): string {
     const map: Record<TaskStatus, string> = {
-      'todo': 'badge bg-gray-100 text-gray-700',
-      'in-progress': 'badge bg-blue-100 text-blue-700',
-      'done': 'badge bg-green-100 text-green-700',
+      'todo':        'badge-todo',
+      'in-progress': 'badge-in-progress',
+      'done':        'badge-done',
     };
     return map[status];
   }
 
   priorityBadgeClass(priority: TaskPriority): string {
     const map: Record<TaskPriority, string> = {
-      'low': 'badge bg-gray-100 text-gray-600',
-      'medium': 'badge bg-yellow-100 text-yellow-700',
-      'high': 'badge bg-red-100 text-red-700',
+      'low':    'badge-low',
+      'medium': 'badge-medium',
+      'high':   'badge-high',
+    };
+    return map[priority];
+  }
+
+  priorityBorderClass(priority: TaskPriority): string {
+    const map: Record<TaskPriority, string> = {
+      'low':    'priority-low',
+      'medium': 'priority-medium',
+      'high':   'priority-high',
     };
     return map[priority];
   }

@@ -2,52 +2,38 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Task Manager</title>
+  <title>TaskFlow</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- ── Security meta tags ─────────────────────────────────────────── -->
-  <!--
-    Content Security Policy:
-    - default-src 'self'          → only same-origin resources
-    - script-src 'self'           → no inline scripts, no eval
-    - style-src 'self' 'unsafe-inline' → TailwindCSS needs inline styles
-    - connect-src 'self' http://localhost:3000  → API calls only
-    - img-src 'self' data:        → inline SVG/data URIs allowed
-    - object-src 'none'           → blocks Flash/plugins
-    - frame-ancestors 'none'      → prevents clickjacking
-    - base-uri 'self'             → prevents base tag injection
-    - form-action 'self'          → forms can only submit to same origin
-  -->
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'self';
                  script-src 'self';
-                 style-src 'self' 'unsafe-inline';
+                 style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
                  connect-src 'self' http://localhost:3000;
                  img-src 'self' data:;
-                 font-src 'self';
+                 font-src 'self' https://fonts.gstatic.com;
                  object-src 'none';
                  frame-src 'none';
                  frame-ancestors 'none';
                  base-uri 'self';
                  form-action 'self';">
 
-  <!-- Clickjacking protection (redundant with CSP frame-ancestors, belt+suspenders) -->
   <meta http-equiv="X-Frame-Options" content="DENY">
-
-  <!-- Prevents MIME-type sniffing attacks -->
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
-
-  <!-- Controls referrer information sent with requests -->
   <meta name="referrer" content="strict-origin-when-cross-origin">
-
-  <!-- Disable browser features not needed by this app -->
   <meta http-equiv="Permissions-Policy"
         content="camera=(), microphone=(), geolocation=(), payment=()">
 
+  <!-- ── Fonts ─────────────────────────────────────────────────────── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
-<body class="bg-gray-50 min-h-screen">
+<body>
   <app-root></app-root>
 </body>
 </html>
