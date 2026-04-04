@@ -1,0 +1,42 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    /* ── Target & Module ───────────────────────────────────────────── */
+    "target": "ES2022",
+    "module": "ES2022",
+    "lib": ["ES2022", "dom", "dom.iterable"],
+
+    /* ── Emit ──────────────────────────────────────────────────────── */
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "importHelpers": true,
+
+    /* ── Module resolution ─────────────────────────────────────────── */
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
+
+    /* ── Decorators ────────────────────────────────────────────────── */
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
+
+    /* ── Strict — one flag enables the entire suite ────────────────── */
+    "strict": true,
+
+    /* ── Additional checks ─────────────────────────────────────────── */
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* ── Performance ───────────────────────────────────────────────── */
+    "skipLibCheck": true,
+    "isolatedModules": true
+  },
+  "angularCompilerOptions": {
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}

@@ -1,0 +1,86 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full space-y-8">
+    <div>
+      <h1 class="text-center text-4xl font-bold text-primary-600">TaskManager</h1>
+      <h2 class="mt-4 text-center text-2xl font-semibold text-gray-900">Create your account</h2>
+    </div>
+
+    <div class="card">
+      @if (errorMessage()) {
+        <div class="mb-4 rounded-md bg-red-50 border border-red-200 p-4 text-sm text-red-700">
+          {{ errorMessage() }}
+        </div>
+      }
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-5">
+        <div>
+          <label for="name" class="form-label">Full name</label>
+          <input
+            id="name"
+            type="text"
+            formControlName="name"
+            class="form-input"
+            [class.border-red-500]="nameControl.invalid && nameControl.touched"
+            placeholder="John Doe"
+          />
+          @if (nameControl.invalid && nameControl.touched) {
+            <p class="mt-1 text-xs text-red-600">
+              @if (nameControl.errors?.['required']) { Name is required. }
+              @else if (nameControl.errors?.['minlength']) { Minimum 2 characters. }
+            </p>
+          }
+        </div>
+
+        <div>
+          <label for="email" class="form-label">Email address</label>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            class="form-input"
+            [class.border-red-500]="emailControl.invalid && emailControl.touched"
+            placeholder="you@example.com"
+            autocomplete="email"
+          />
+          @if (emailControl.invalid && emailControl.touched) {
+            <p class="mt-1 text-xs text-red-600">
+              @if (emailControl.errors?.['required']) { Email is required. }
+              @else if (emailControl.errors?.['email']) { Enter a valid email. }
+            </p>
+          }
+        </div>
+
+        <div>
+          <label for="password" class="form-label">Password</label>
+          <input
+            id="password"
+            type="password"
+            formControlName="password"
+            class="form-input"
+            [class.border-red-500]="passwordControl.invalid && passwordControl.touched"
+            placeholder="Min. 8 characters"
+            autocomplete="new-password"
+          />
+          @if (passwordControl.invalid && passwordControl.touched) {
+            <p class="mt-1 text-xs text-red-600">
+              @if (passwordControl.errors?.['required']) { Password is required. }
+              @else if (passwordControl.errors?.['minlength']) { Minimum 8 characters. }
+            </p>
+          }
+        </div>
+
+        <button type="submit" class="btn-primary w-full" [disabled]="isLoading()">
+          @if (isLoading()) { <span>Creating account…</span> }
+          @else { <span>Create account</span> }
+        </button>
+      </form>
+
+      <p class="mt-6 text-center text-sm text-gray-600">
+        Already have an account?
+        <a routerLink="/auth/login" class="font-medium text-primary-600 hover:text-primary-700">
+          Sign in
+        </a>
+      </p>
+    </div>
+  </div>
+</div>

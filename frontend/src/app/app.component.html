@@ -1,0 +1,30 @@
+@if (authService.isAuthenticated()) {
+  <nav class="bg-white border-b border-gray-200 shadow-sm">
+    <div class="max-w-5xl mx-auto px-4 flex items-center justify-between h-14">
+      <div class="flex items-center gap-6">
+        <span class="font-bold text-primary-600 text-lg">TaskManager</span>
+        <a
+          routerLink="/dashboard"
+          routerLinkActive="text-primary-600 font-medium"
+          class="text-sm text-gray-600 hover:text-gray-900"
+        >Dashboard</a>
+        <a
+          routerLink="/tasks"
+          routerLinkActive="text-primary-600 font-medium"
+          class="text-sm text-gray-600 hover:text-gray-900"
+        >Tasks</a>
+      </div>
+      <div class="flex items-center gap-4">
+        <span class="text-sm text-gray-600">{{ authService.currentUser()?.name }}</span>
+        <button
+          class="btn-secondary text-sm px-3 py-1"
+          (click)="authService.logout()"
+        >Logout</button>
+      </div>
+    </div>
+  </nav>
+}
+
+<main>
+  <router-outlet />
+</main>

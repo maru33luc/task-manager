@@ -1,0 +1,56 @@
+<div class="max-w-5xl mx-auto px-4 py-8">
+  <div class="mb-8">
+    <h1 class="text-2xl font-bold text-gray-900">
+      Welcome, {{ authService.currentUser()?.name }}!
+    </h1>
+    <p class="text-gray-500 mt-1">Here's an overview of your tasks.</p>
+  </div>
+
+  @if (isLoading()) {
+    <div class="text-center py-12 text-gray-500">Loading statistics…</div>
+  } @else if (error()) {
+    <div class="rounded-md bg-red-50 border border-red-200 p-4 text-sm text-red-700">
+      {{ error() }}
+    </div>
+  } @else {
+    <h2 class="text-lg font-semibold text-gray-700 mb-3">Tasks by Status</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+      <div class="card text-center">
+        <div class="text-3xl font-bold text-gray-500">{{ todoCount() }}</div>
+        <div class="mt-1 text-sm font-medium text-gray-600">Todo</div>
+      </div>
+      <div class="card text-center">
+        <div class="text-3xl font-bold text-blue-600">{{ inProgressCount() }}</div>
+        <div class="mt-1 text-sm font-medium text-gray-600">In Progress</div>
+      </div>
+      <div class="card text-center">
+        <div class="text-3xl font-bold text-green-600">{{ doneCount() }}</div>
+        <div class="mt-1 text-sm font-medium text-gray-600">Done</div>
+      </div>
+    </div>
+
+    <h2 class="text-lg font-semibold text-gray-700 mb-3">Tasks by Priority</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+      <div class="card text-center">
+        <div class="text-3xl font-bold text-gray-400">{{ lowCount() }}</div>
+        <div class="mt-1 text-sm font-medium text-gray-600">Low</div>
+      </div>
+      <div class="card text-center">
+        <div class="text-3xl font-bold text-yellow-500">{{ mediumCount() }}</div>
+        <div class="mt-1 text-sm font-medium text-gray-600">Medium</div>
+      </div>
+      <div class="card text-center">
+        <div class="text-3xl font-bold text-red-500">{{ highCount() }}</div>
+        <div class="mt-1 text-sm font-medium text-gray-600">High</div>
+      </div>
+    </div>
+
+    <div class="card flex items-center justify-around">
+      <div>
+        <div class="text-4xl font-bold text-primary-600">{{ total() }}</div>
+        <div class="text-sm font-medium text-gray-600 mt-1">Total Tasks</div>
+      </div>
+      <a routerLink="/tasks" class="btn-primary">View All Tasks →</a>
+    </div>
+  }
+</div>

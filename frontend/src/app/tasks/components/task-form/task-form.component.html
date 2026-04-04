@@ -1,0 +1,76 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h2 class="text-lg font-semibold text-gray-900 mb-4">
+    {{ isEditing ? 'Edit Task' : 'New Task' }}
+  </h2>
+
+  @if (errorMessage()) {
+    <div class="mb-4 rounded-md bg-red-50 border border-red-200 p-3 text-sm text-red-700">
+      {{ errorMessage() }}
+    </div>
+  }
+
+  <div class="space-y-4">
+    <div>
+      <label class="form-label" for="title">Title *</label>
+      <input
+        id="title"
+        type="text"
+        formControlName="title"
+        class="form-input"
+        [class.border-red-500]="titleControl.invalid && titleControl.touched"
+        placeholder="Task title"
+      />
+      @if (titleControl.invalid && titleControl.touched) {
+        <p class="mt-1 text-xs text-red-600">Title is required.</p>
+      }
+    </div>
+
+    <div>
+      <label class="form-label" for="description">Description</label>
+      <textarea
+        id="description"
+        formControlName="description"
+        class="form-input"
+        rows="3"
+        placeholder="Optional description…"
+      ></textarea>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <label class="form-label" for="status">Status</label>
+        <select id="status" formControlName="status" class="form-input">
+          @for (opt of statusOptions; track opt.value) {
+            <option [value]="opt.value">{{ opt.label }}</option>
+          }
+        </select>
+      </div>
+
+      <div>
+        <label class="form-label" for="priority">Priority</label>
+        <select id="priority" formControlName="priority" class="form-input">
+          @for (opt of priorityOptions; track opt.value) {
+            <option [value]="opt.value">{{ opt.label }}</option>
+          }
+        </select>
+      </div>
+    </div>
+
+    <div>
+      <label class="form-label" for="dueDate">Due Date</label>
+      <input
+        id="dueDate"
+        type="date"
+        formControlName="dueDate"
+        class="form-input"
+      />
+    </div>
+
+    <div class="flex gap-3 justify-end pt-2">
+      <button type="button" class="btn-secondary" (click)="onCancel()">Cancel</button>
+      <button type="submit" class="btn-primary" [disabled]="isLoading()">
+        {{ isLoading() ? 'Saving…' : (isEditing ? 'Update Task' : 'Create Task') }}
+      </button>
+    </div>
+  </div>
+</form>
