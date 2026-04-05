@@ -2,5 +2,5 @@
 // e.g. https://task-manager-production-xxxx.up.railway.app
 export const environment = {
   production: true,
-  apiUrl: 'https://RAILWAY_BACKEND_URL',
+  apiUrl: 'https://task-manager-api-2eb7.onrender.com',
 };

@@ -33,7 +33,13 @@
       "Bash(powershell.exe -NoProfile -Command ':*)",
       "Bash(echo \"exit: $?\")",
       "Bash(powershell.exe:*)",
-      "Bash(grep -n \"font-display font-bold.*leading-tight\" /c/Users/maru3/Desktop/PROJECTOS/task-manager/frontend/src/app/**/*.html)"
+      "Bash(grep -n \"font-display font-bold.*leading-tight\" /c/Users/maru3/Desktop/PROJECTOS/task-manager/frontend/src/app/**/*.html)",
+      "Bash(gh run:*)",
+      "Bash(git commit:*)",
+      "Bash(npm test:*)",
+      "Bash(render --version)",
+      "Bash(curl:*)",
+      "Bash(node -e ':*)"
     ]
   }
 }
