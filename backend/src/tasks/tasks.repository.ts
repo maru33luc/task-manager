@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { FindOneOptions, Repository } from 'typeorm';
 import { Task } from '../entities';
 import { TaskFilterDto } from './dto';
 
@@ -30,7 +30,7 @@ export class TasksRepository {
     return this.repo.createQueryBuilder(alias);
   }
 
-  async findOne(options: any) {
+  async findOne(options: FindOneOptions<Task>) {
     return this.repo.findOne(options);
   }
 
