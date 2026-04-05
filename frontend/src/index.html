@@ -11,20 +11,15 @@
         content="default-src 'self';
                  script-src 'self';
                  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-                 connect-src 'self' http://localhost:3000;
+                 connect-src 'self' http://localhost:3000 https://task-manager-api-2eb7.onrender.com;
                  img-src 'self' data:;
                  font-src 'self' https://fonts.gstatic.com;
                  object-src 'none';
                  frame-src 'none';
-                 frame-ancestors 'none';
                  base-uri 'self';
                  form-action 'self';">
-
-  <meta http-equiv="X-Frame-Options" content="DENY">
-  <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta http-equiv="Permissions-Policy"
-        content="camera=(), microphone=(), geolocation=(), payment=()">
+  <!-- frame-ancestors y X-Frame-Options solo funcionan como HTTP headers,
+       no como meta tags. Se aplican vía vercel.json para el frontend. -->
 
   <!-- ── Fonts ─────────────────────────────────────────────────────── -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
