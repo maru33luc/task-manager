@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { getRepositoryToken } from '@nestjs/typeorm';
 import { NotFoundException, ForbiddenException } from '@nestjs/common';
 import { TasksService } from './tasks.service';
+import { TasksRepository } from './tasks.repository';
 import { Task, TaskStatus, TaskPriority } from '../entities';
 
 const mockTask: Task = {
@@ -30,7 +30,7 @@ describe('TasksService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [TasksService, { provide: getRepositoryToken(Task), useValue: mockRepository }],
+      providers: [TasksService, { provide: TasksRepository, useValue: mockRepository }],
     }).compile();
 
     service = module.get<TasksService>(TasksService);
