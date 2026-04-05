@@ -1,4 +1,6 @@
+// Replace RAILWAY_BACKEND_URL with the public URL from your Railway service dashboard
+// e.g. https://task-manager-production-xxxx.up.railway.app
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:3000',
+  apiUrl: 'https://RAILWAY_BACKEND_URL',
 };

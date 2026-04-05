@@ -37,13 +37,29 @@ import { StatsModule } from './stats';
 
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => ({
-        type: 'better-sqlite3',
-        database: configService.get<string>('DB_PATH', './tasks.db'),
-        entities: [User, Task],
-        synchronize: false,
-        logging: configService.get<string>('NODE_ENV') !== 'production',
-      }),
+      useFactory: (configService: ConfigService) => {
+        const databaseUrl = configService.get<string>('DATABASE_URL');
+        const isProduction = configService.get<string>('NODE_ENV') === 'production';
+
+        if (databaseUrl) {
+          return {
+            type: 'postgres' as const,
+            url: databaseUrl,
+            entities: [User, Task],
+            synchronize: false,
+            logging: !isProduction,
+            ssl: { rejectUnauthorized: false },
+          };
+        }
+
+        return {
+          type: 'better-sqlite3' as const,
+          database: configService.get<string>('DB_PATH', './tasks.db'),
+          entities: [User, Task],
+          synchronize: false,
+          logging: !isProduction,
+        };
+      },
       inject: [ConfigService],
     }),
 

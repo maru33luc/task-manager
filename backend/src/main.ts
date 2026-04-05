@@ -91,8 +91,11 @@ async function bootstrap() {
   }
 
   const port = configService.get<number>('PORT', 3000);
-  await app.listen(port, '127.0.0.1'); // bind to localhost only; use a reverse proxy in prod
-  console.log(`API running on http://localhost:${port}`);
+  // In production (Railway) bind to all interfaces so the platform can route traffic.
+  // Locally bind only to loopback — use a reverse proxy in prod for TLS termination.
+  const host = isProduction ? '0.0.0.0' : '127.0.0.1';
+  await app.listen(port, host);
+  console.log(`API running on port ${port}`);
   if (!isProduction) {
     console.log(`Swagger: http://localhost:${port}/api/docs`);
   }

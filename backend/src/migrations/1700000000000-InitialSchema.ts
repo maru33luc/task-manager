@@ -4,6 +4,10 @@ export class InitialSchema1700000000000 implements MigrationInterface {
   name = 'InitialSchema1700000000000';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
+    // This migration targets SQLite only. On PostgreSQL the sibling
+    // PostgresSchema migration handles the initial schema instead.
+    if (queryRunner.connection.options.type !== 'better-sqlite3') return;
+
     await queryRunner.query(`
       CREATE TABLE "users" (
         "id" varchar PRIMARY KEY NOT NULL,
@@ -36,6 +40,7 @@ export class InitialSchema1700000000000 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
+    if (queryRunner.connection.options.type !== 'better-sqlite3') return;
     await queryRunner.query(`DROP INDEX "IDX_tasks_priority"`);
     await queryRunner.query(`DROP INDEX "IDX_tasks_status"`);
     await queryRunner.query(`DROP INDEX "IDX_tasks_userId"`);
