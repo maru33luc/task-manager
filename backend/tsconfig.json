@@ -14,7 +14,7 @@
     "incremental": true,
 
     /* ── Module resolution ─────────────────────────────────────────── */
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
@@ -34,5 +34,6 @@
 
     /* ── Performance ───────────────────────────────────────────────── */
     "skipLibCheck": true
-  }
+  },
+  "include": ["src"]
 }

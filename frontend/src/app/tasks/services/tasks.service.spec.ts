@@ -82,7 +82,8 @@ describe('TasksService', () => {
     const req = httpMock.expectOne('http://localhost:3000/tasks');
     expect(req.request.method).toBe('POST');
     expect(req.request.body).toEqual({ title: 'New Task' });
-    req.flush(mockTask);
+    const created = { ...mockTask, id: 'task-2', title: 'New Task' };
+    req.flush(created);
   });
 
   it('should update a task', () => {

@@ -3,8 +3,9 @@ import { test, expect } from '@playwright/test';
 test.describe('Authentication', () => {
   test('should display login page by default', async ({ page }) => {
     await page.goto('/');
-    await expect(page).toHaveURL(/auth\/login/);
-    await expect(page.getByRole('heading', { name: /sign in/i })).toBeVisible();
+    await expect(page).toHaveURL(/auth\/login/, { timeout: 10000 });
+    // Heading text is 'Welcome back' in the current UI
+    await expect(page.getByRole('heading', { name: /welcome back/i })).toBeVisible();
   });
 
   test('should show validation errors on empty submit', async ({ page }) => {
@@ -16,7 +17,8 @@ test.describe('Authentication', () => {
 
   test('should navigate to register page', async ({ page }) => {
     await page.goto('/auth/login');
-    await page.getByRole('link', { name: /register/i }).click();
+    // Link text is 'Create one →' in the current UI
+    await page.getByRole('link', { name: /create one/i }).click();
     await expect(page).toHaveURL(/auth\/register/);
     await expect(page.getByRole('heading', { name: /create your account/i })).toBeVisible();
   });

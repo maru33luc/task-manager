@@ -1,8 +1,7 @@
 import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { Task } from '../entities';
 import { CreateTaskDto, UpdateTaskDto, TaskFilterDto } from './dto';
+import { TasksRepository } from './tasks.repository';
 
 export interface PaginatedTasks {
   data: Task[];
@@ -26,10 +25,7 @@ export interface TaskResponseDto {
 
 @Injectable()
 export class TasksService {
-  constructor(
-    @InjectRepository(Task)
-    private readonly tasksRepository: Repository<Task>,
-  ) {}
+  constructor(private readonly tasksRepository: TasksRepository) {}
 
   async findAll(userId: string, filter: TaskFilterDto): Promise<PaginatedTasks> {
     const { status, priority, page = 1, limit = 10 } = filter;

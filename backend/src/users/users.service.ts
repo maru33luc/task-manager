@@ -1,6 +1,6 @@
 import { Injectable, ConflictException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, DataSource } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
 import { User } from '../entities';
 
@@ -15,6 +15,7 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private readonly usersRepository: Repository<User>,
+    private readonly dataSource: DataSource,
   ) {}
 
   async create(data: CreateUserData): Promise<User> {
@@ -41,8 +42,19 @@ export class UsersService {
   }
 
   async updateRefreshToken(userId: string, refreshToken: string | null): Promise<void> {
-    const hashed = refreshToken ? await bcrypt.hash(refreshToken, 10) : null;
-    await this.usersRepository.update(userId, { refreshToken: hashed });
+    const queryRunner = this.dataSource.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+    try {
+      const hashed = refreshToken ? await bcrypt.hash(refreshToken, 10) : null;
+      await queryRunner.manager.update(User, userId, { refreshToken: hashed });
+      await queryRunner.commitTransaction();
+    } catch (error) {
+      await queryRunner.rollbackTransaction();
+      throw error;
+    } finally {
+      await queryRunner.release();
+    }
   }
 
   async validateRefreshToken(userId: string, token: string): Promise<boolean> {

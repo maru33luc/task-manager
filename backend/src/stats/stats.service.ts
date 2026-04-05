@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Task, TaskStatus, TaskPriority } from '../entities';
+import { TaskStatus, TaskPriority } from '../entities';
+import { StatsRepository } from './stats.repository';
 
 export interface StatsResponse {
   byStatus: Record<TaskStatus, number>;
@@ -11,31 +10,9 @@ export interface StatsResponse {
 
 @Injectable()
 export class StatsService {
-  constructor(
-    @InjectRepository(Task)
-    private readonly tasksRepository: Repository<Task>,
-  ) {}
+  constructor(private readonly statsRepository: StatsRepository) {}
 
   async getStats(userId: string): Promise<StatsResponse> {
-    const tasks = await this.tasksRepository.find({ where: { userId } });
-
-    const byStatus: Record<TaskStatus, number> = {
-      [TaskStatus.TODO]: 0,
-      [TaskStatus.IN_PROGRESS]: 0,
-      [TaskStatus.DONE]: 0,
-    };
-
-    const byPriority: Record<TaskPriority, number> = {
-      [TaskPriority.LOW]: 0,
-      [TaskPriority.MEDIUM]: 0,
-      [TaskPriority.HIGH]: 0,
-    };
-
-    for (const task of tasks) {
-      byStatus[task.status]++;
-      byPriority[task.priority]++;
-    }
-
-    return { byStatus, byPriority, total: tasks.length };
+    return this.statsRepository.getStatsByUser(userId);
   }
 }

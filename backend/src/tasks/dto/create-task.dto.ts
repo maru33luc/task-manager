@@ -1,5 +1,7 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsString, IsEnum, IsOptional, MinLength, MaxLength, IsDateString } from 'class-validator';
+import { Transform } from 'class-transformer';
+import sanitizeHtml from 'sanitize-html';
 import { TaskStatus, TaskPriority } from '../../entities';
 
 export class CreateTaskDto {
@@ -13,6 +15,11 @@ export class CreateTaskDto {
   @IsString()
   @IsOptional()
   @MaxLength(2000)
+  @Transform(({ value }) =>
+    typeof value === 'string'
+      ? sanitizeHtml(value, { allowedTags: [], allowedAttributes: {} })
+      : value,
+  )
   description?: string;
 
   @ApiPropertyOptional({ enum: TaskStatus, default: TaskStatus.TODO })
