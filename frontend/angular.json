@@ -34,6 +34,11 @@
           "configurations": {
             "production": {
               "index": { "input": "src/index.prod.html", "output": "index.html" },
+              "optimization": {
+                "scripts": true,
+                "styles": { "minify": true, "inlineCritical": false },
+                "fonts": true
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
