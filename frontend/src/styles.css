@@ -34,7 +34,7 @@
      BUTTONS
   ═══════════════════════════════════ */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded px-4 py-2 text-sm leading-normal
+    @apply inline-flex items-center justify-center gap-2 rounded px-4 pt-2 pb-2.5 text-sm leading-normal
            font-bold tracking-wide transition-all duration-150 overflow-visible
            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-ink-950
            disabled:pointer-events-none disabled:opacity-35 select-none;
