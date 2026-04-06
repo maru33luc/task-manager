@@ -34,11 +34,14 @@
      BUTTONS
   ═══════════════════════════════════ */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded px-4 pt-2 pb-2.5 text-sm leading-normal
-           font-bold tracking-wide transition-all duration-150 overflow-visible
+    @apply inline-flex items-center justify-center gap-2 rounded px-4 pt-2 pb-2.5
+           font-bold tracking-wide transition-all duration-150
+           appearance-none overflow-visible
            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-ink-950
            disabled:pointer-events-none disabled:opacity-35 select-none;
     font-family: 'Syne', system-ui, sans-serif;
+    font-size: 0.875rem;   /* evita que text-sm inyecte line-height:1.25rem */
+    line-height: 1.5;      /* declarado directamente, no via @apply leading-normal */
     letter-spacing: 0.04em;
   }
 
